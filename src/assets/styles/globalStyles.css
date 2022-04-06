@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: auto;
+  background-color: rgb(25, 32, 65, 0.1);
+}
+
+h1 {
+  color: white;
+  font-size: 40px;
+  font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 00;
+  margin: 10px;
+}
+
+button {
+  background-color: goldenrod;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+button:hover {
+  border-bottom: 3px solid rgb(25, 32, 65);
+}
