@@ -13,6 +13,11 @@ body {
   background-color: rgb(25, 32, 65, 0.1);
 }
 
+p {
+  font-size: 14px;
+  color: rgb(25, 32, 65);
+}
+
 h1 {
   color: white;
   font-size: 40px;
@@ -23,10 +28,17 @@ h1 {
 
 h2 {
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   text-transform: uppercase;
   font-weight: 100;
   color: rgb(25, 32, 65);
+}
+
+h3 {
+  font-size: 16px;
+  color: rgb(25, 32, 65, 0.6);
+  margin-top: 30px;
+  margin-bottom: 0px;
 }
 
 button {
