@@ -15,19 +15,15 @@
       <h2>List of coaches</h2>
       <section>
         <ul>
-          <coach-item v-for="coach in filteredCoaches" :key="coach.id">
-            <template v-slot:coachName>
-              <h3>{{ coach.firstName }} {{ coach.lastName }}</h3>
-            </template>
-            <template v-slot:coachAreas>
-              <p class="areas">{{ areaStyling(coach.areas) }}</p>
-            </template>
-            <template v-slot:coachDescription>
-              <p>{{ coach.description }}</p>
-            </template>
-            <template v-slot:coachHourlyRate>
-              <p class="hourlyRate">Hourly rate: $ {{ coach.hourlyRate }},-</p>
-            </template>
+          <coach-item
+            v-for="coach in filteredCoaches"
+            :key="coach.id"
+            :coachFirstName="coach.firstName"
+            :coachLastName="coach.lastName"
+            :coachDescription="coach.description"
+            :coachHourlyRate="coach.hourlyRate"
+            :coachAreas="coach.areas"
+          >
           </coach-item>
         </ul>
       </section>
@@ -51,12 +47,7 @@ export default {
       return store.getters['allCoaches/coaches']; //allCoaches is the namespace of the module-coaches and coaches is the name of the getter (take a look a coaches-getters)
     });
 
-    function areaStyling(input) {
-      input = input.join(' | ');
-      return input;
-    }
-
-    return { areaStyling, filteredCoaches };
+    return { filteredCoaches };
   },
 };
 </script>
@@ -83,21 +74,5 @@ ul {
 
 button {
   margin-right: 10px;
-}
-
-p.areas {
-  margin-top: 6px;
-  color: rgb(25, 32, 65);
-}
-
-.areas {
-  font-style: italic;
-  font-size: 12px;
-}
-
-.hourlyRate {
-  color: rgb(25, 32, 65, 0.6);
-  font-style: italic;
-  font-size: 12px;
 }
 </style>
