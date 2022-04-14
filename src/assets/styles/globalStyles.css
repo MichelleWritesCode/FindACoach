@@ -41,18 +41,7 @@ h3 {
   margin-bottom: 0px;
 }
 
-button {
-  background-color: goldenrod;
-  color: white;
-  border: none;
-  padding: 5px 15px;
-}
-
 a {
   color: white;
   text-decoration: none;
-}
-
-button:hover {
-  border-bottom: 3px solid rgb(25, 32, 65);
 }
