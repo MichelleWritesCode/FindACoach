@@ -1,14 +1,8 @@
 <template>
   <section class="inline">
     <li>
-      <!-- <slot name="coachName"></slot>
-    <slot name="coachAreas"></slot>
-    <slot name="coachDescription"></slot>
-    <slot name="coachHourlyRate"></slot> -->
-
       <h3>{{ fullName }}</h3>
       <p class="areas">{{ areaStyling(coachAreas) }}</p>
-      <!-- <p>{{ coachDescription }}</p> -->
       <p class="hourlyRate">$ {{ coachHourlyRate }},- / hour</p>
     </li>
     <div class="actions">
@@ -58,16 +52,16 @@ export default {
   setup(props) {
     const route = useRoute();
 
-    const fullName = computed(() => {
-      return props.coachFirstName + ' ' + props.coachLastName;
-    });
-
     const coachDetailsLink = computed(() => {
       return route.path + '/' + props.coachId;
     });
 
     const coachContactLink = computed(() => {
       return route.path + '/' + props.coachId + '/contact';
+    });
+
+    const fullName = computed(() => {
+      return props.coachFirstName + ' ' + props.coachLastName;
     });
 
     function areaStyling(input) {
