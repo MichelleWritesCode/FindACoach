@@ -14,7 +14,7 @@ export default {
           areas: ['front-end', 'back-end', 'career'],
           description:
             "I'm Maximilian and I've worked as a freelance web developer for years. Let me help you become a developer as well!",
-          hourlyRate: 30,
+          hourlyRate: 130,
         },
         {
           id: 'c2',
@@ -23,7 +23,7 @@ export default {
           areas: ['front-end', 'career'],
           description:
             'I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.',
-          hourlyRate: 30,
+          hourlyRate: 130,
         },
         {
           id: 'c3',
@@ -32,7 +32,7 @@ export default {
           areas: ['front-end', 'graphic design', 'communications'],
           description:
             "I am Michelle and I'm a junior developer in a little company. I build apps for social organisations.",
-          hourlyRate: 110,
+          hourlyRate: 105,
         },
         {
           id: 'c4',
@@ -41,7 +41,7 @@ export default {
           areas: ['back-end', 'frond-end', 'migration'],
           description:
             "I am Ruben and I'm a senior software developer and I work as a consultant at a bank.",
-          hourlyRate: 90,
+          hourlyRate: 105,
         },
       ],
     };
