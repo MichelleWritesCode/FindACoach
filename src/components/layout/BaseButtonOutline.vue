@@ -10,6 +10,5 @@ button {
   border: solid 1px goldenrod;
   color: white;
   border: none;
-  font-size: 16px;
 }
 </style>
