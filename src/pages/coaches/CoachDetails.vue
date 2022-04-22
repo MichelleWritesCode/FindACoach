@@ -1,11 +1,13 @@
 <template>
-  <the-title>Coach details</the-title>
-  <base-card>
-    <h3>{{ fullName }}</h3>
-    <p class="areas">{{ areaStyling(selectedCoach.areas) }}</p>
-    <p class="hourlyRate">$ {{ selectedCoach.hourlyRate }},- / hour</p>
-  </base-card>
-  <router-view></router-view>
+  <section class="container">
+    <the-title>Coach details</the-title>
+    <base-card>
+      <h3>{{ fullName }}</h3>
+      <p class="areas">{{ areaStyling(selectedCoach.areas) }}</p>
+      <p class="hourlyRate">$ {{ selectedCoach.hourlyRate }},- / hour</p>
+    </base-card>
+    <router-view></router-view>
+  </section>
 </template>
 
 <script>
