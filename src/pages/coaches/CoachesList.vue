@@ -1,41 +1,46 @@
 <template>
-  <the-title>Coaches</the-title>
-  <base-card>
-    <section class="toolbar">
-      <section class="filter"><h2>Filter</h2></section>
-      <section class="controle">
-        <base-button><template v-slot>refresh</template></base-button>
-        <base-button
-          ><template v-slot
-            ><router-link to="/register">register</router-link></template
-          ></base-button
-        >
-      </section>
-    </section>
-  </base-card>
-
-  <base-card>
-    <section>
-      <h2>List of coaches</h2>
-      <hr />
+  <section class="container">
+    <the-title>Coaches</the-title>
+    <base-card>
       <section>
-        <ul v-if="hasCoaches">
-          <coach-item
-            v-for="coach in filteredCoaches"
-            :key="coach.id"
-            :coachId="coach.id"
-            :coachFirstName="coach.firstName"
-            :coachLastName="coach.lastName"
-            :coachDescription="coach.description"
-            :coachHourlyRate="coach.hourlyRate"
-            :coachAreas="coach.areas"
-          >
-          </coach-item>
-        </ul>
-        <h3 v-else>No coaches found</h3>
+        <section><h2 class="filterHeading">Filter</h2></section>
       </section>
-    </section>
-  </base-card>
+    </base-card>
+
+    <base-card>
+      <section>
+        <section class="toolbar">
+          <section class="controle">
+            <base-button><template v-slot>refresh</template></base-button>
+            <base-button id="register"
+              ><template v-slot
+                ><router-link to="/register"
+                  >register as a coach</router-link
+                ></template
+              ></base-button
+            >
+          </section>
+        </section>
+        <hr />
+        <section>
+          <ul v-if="hasCoaches">
+            <coach-item
+              v-for="coach in filteredCoaches"
+              :key="coach.id"
+              :coachId="coach.id"
+              :coachFirstName="coach.firstName"
+              :coachLastName="coach.lastName"
+              :coachDescription="coach.description"
+              :coachHourlyRate="coach.hourlyRate"
+              :coachAreas="coach.areas"
+            >
+            </coach-item>
+          </ul>
+          <h3 v-else>No coaches found</h3>
+        </section>
+      </section>
+    </base-card>
+  </section>
 </template>
 
 <script>
@@ -73,8 +78,7 @@ h2 {
 hr {
   border: 0;
   border-top: 1px solid rgb(25, 32, 65, 0.1);
-  margin-right: 20px;
-  margin-bottom: 0;
+  margin: 0 5px 0 0;
 }
 
 ul {
@@ -82,18 +86,22 @@ ul {
   margin-top: 0;
 }
 
-.toolbar .filter {
-  margin-right: 535px;
+.filterHeading {
+  margin: 0;
 }
 
-.toolbar .filter,
-.toolbar .filter h2,
+.toolbar {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.toolbar h2,
 .toolbar .controle {
   display: inline;
   flex-wrap: nowrap;
 }
 
-button {
-  margin-right: 10px;
-}
+/* button#register {
+  
+} */
 </style>
