@@ -11,7 +11,7 @@
       <section>
         <section class="toolbar">
           <section class="controle">
-            <base-button><template v-slot>refresh</template></base-button>
+            <base-button><template v-slot>refresh list</template></base-button>
             <base-button id="register"
               ><template v-slot
                 ><router-link to="/register"
@@ -47,7 +47,7 @@
 import BaseButton from '../../components/layout/BaseButton.vue';
 import BaseCard from '../../components/layout/BaseCard.vue';
 import TheTitle from '../../components/layout/TheTitle.vue';
-import CoachItem from './CoachItem.vue';
+import CoachItem from '../../components/CoachItem.vue';
 
 import { computed } from 'vue';
 import { useStore } from 'vuex';
@@ -93,6 +93,7 @@ ul {
 .toolbar {
   display: flex;
   margin-bottom: 20px;
+  justify-content: center;
 }
 
 .toolbar h2,
@@ -101,7 +102,8 @@ ul {
   flex-wrap: nowrap;
 }
 
-/* button#register {
-  
-} */
+button#register {
+  margin-left: 12px;
+  margin-right: 6px;
+}
 </style>
