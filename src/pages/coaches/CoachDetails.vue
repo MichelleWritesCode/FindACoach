@@ -42,11 +42,11 @@ import { computed } from 'vue';
 
 export default {
   components: { TheTitle, BaseCard, BaseButton, BaseRibbon },
-  setup(props) {
+  setup() {
     const route = useRoute();
     let coachId = route.params.id;
     const coachContactLink = computed(() => {
-      return route.path + '/' + props.coachId + '/contact';
+      return route.path + '/contact';
     });
 
     const store = useStore();
