@@ -3,16 +3,26 @@
     <li>
       <h3>{{ fullName }}</h3>
       <p class="areas">{{ areaStyling(coachAreas) }}</p>
-      <p class="hourlyRate">$ {{ coachHourlyRate }},- / hour</p>
+      <base-ribbon>
+        <p class="hourlyRate">$ {{ coachHourlyRate }},- / hour</p>
+      </base-ribbon>
     </li>
     <div class="actions">
       <ul>
-        <li>
-          <router-link :to="coachDetailsLink" class="link">details</router-link>
-        </li>
-        <li>
-          <router-link :to="coachContactLink" class="link">contact</router-link>
-        </li>
+        <base-button-outline>
+          <li>
+            <router-link :to="coachDetailsLink" class="link"
+              >view details</router-link
+            >
+          </li>
+        </base-button-outline>
+        <base-button-outline>
+          <li>
+            <router-link :to="coachContactLink" class="link"
+              >contact coach</router-link
+            >
+          </li>
+        </base-button-outline>
       </ul>
     </div>
   </section>
@@ -21,8 +31,11 @@
 <script>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import BaseButtonOutline from '../../components/layout/BaseButtonOutline.vue';
+import BaseRibbon from '../../components/layout/BaseRibbon.vue';
 
 export default {
+  components: { BaseButtonOutline, BaseRibbon },
   props: {
     coachId: {
       type: String,
@@ -75,43 +88,33 @@ export default {
 </script>
 
 <style scoped>
+.inline {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(25, 32, 65, 0.1);
+  margin-right: 5px;
+}
+
 ul {
   text-align: right;
+  margin-top: 60px;
+  padding-left: 10px;
 }
 
 li {
   list-style: none;
-  padding-bottom: 6px;
-}
-
-p.areas {
-  margin-top: 6px;
-  color: rgb(25, 32, 65);
-}
-
-a {
-  text-decoration: none;
-  color: goldenrod;
-}
-
-a:hover {
-  /* background-color: goldenrod;
-  color: white;
-  padding: 5px 15px; */
-  border-bottom: rgb(25, 32, 65) solid 1.5px;
-}
-
-a.link {
-  font-size: 14px;
-}
-
-div.actions {
-  margin-top: 30px;
+  padding-bottom: 20px;
 }
 
 .areas {
   font-style: italic;
-  font-size: 14px;
+  font-size: 15px;
+}
+
+p.areas {
+  margin: 6px 0 25px 0;
+  color: rgb(25, 32, 65);
 }
 
 .hourlyRate {
@@ -120,11 +123,30 @@ div.actions {
   font-size: 14px;
 }
 
-.inline {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  border-bottom: 1px solid rgb(25, 32, 65, 0.1);
-  margin-right: 20px;
+p.hourlyRate {
+  margin: 0;
+}
+
+div.actions {
+  margin-top: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: goldenrod;
+}
+
+a:hover {
+  border-bottom: rgb(25, 32, 65) solid 3px;
+}
+
+a.link {
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.link {
+  width: 70px;
+  border: solid 1px goldenrod;
 }
 </style>
