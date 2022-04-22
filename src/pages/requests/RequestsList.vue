@@ -1,5 +1,7 @@
 <template>
-  <the-title>Requests</the-title>
+  <section class="container">
+    <the-title>Requests</the-title>
+  </section>
 </template>
 
 <script>

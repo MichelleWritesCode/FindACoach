@@ -1,5 +1,7 @@
 <template>
-  <the-title>Register as a coach</the-title>
+  <section class="container">
+    <the-title>Register as a coach</the-title>
+  </section>
 </template>
 
 <script>
