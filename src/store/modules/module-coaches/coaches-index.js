@@ -19,7 +19,7 @@ export default {
         {
           id: 'c2',
           firstName: 'Julie',
-          lastName: 'Jones',
+          lastName: 'van Kaatsheuvel - van der Linden',
           areas: ['front-end', 'career'],
           description:
             'I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.',
