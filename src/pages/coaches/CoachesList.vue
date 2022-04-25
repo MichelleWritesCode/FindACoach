@@ -3,7 +3,15 @@
     <the-title>Coaches</the-title>
     <base-card>
       <section>
-        <section><h2 class="filterHeading">Filter</h2></section>
+        <section class="inline">
+          <h2 class="filterHeading">Filter coach</h2>
+          <input class="filter" type="text" v-model="filterCoach" />
+          <base-button id="register">
+            <template v-slot>
+              <router-link to="/register">register as a coach</router-link>
+            </template>
+          </base-button>
+        </section>
       </section>
     </base-card>
 
@@ -12,13 +20,6 @@
         <section class="toolbar">
           <section class="controle">
             <base-button><template v-slot>refresh list</template></base-button>
-            <base-button id="register"
-              ><template v-slot
-                ><router-link to="/register"
-                  >register as a coach</router-link
-                ></template
-              ></base-button
-            >
           </section>
         </section>
         <hr />
@@ -49,7 +50,7 @@ import BaseCard from '../../components/layout/BaseCard.vue';
 import TheTitle from '../../components/layout/TheTitle.vue';
 import CoachItem from '../../components/CoachItem.vue';
 
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
@@ -61,11 +62,24 @@ export default {
       return store.getters['allCoaches/hasCoaches'];
     });
 
-    const filteredCoaches = computed(() => {
+    const allCoaches = computed(() => {
       return store.getters['allCoaches/coaches']; //allCoaches is the namespace of the module-coaches and coaches is the name of the getter (take a look a coaches-getters)
     });
 
-    return { filteredCoaches, hasCoaches };
+    let filterCoach = ref('');
+
+    const filteredCoaches = computed(() => {
+      return allCoaches.value.filter((coach) => {
+        return (
+          coach.firstName
+            .toLowerCase()
+            .includes(filterCoach.value.toLowerCase()) ||
+          coach.lastName.toLowerCase().includes(filterCoach.value.toLowerCase())
+        );
+      });
+    });
+
+    return { allCoaches, hasCoaches, filterCoach, filteredCoaches };
   },
 };
 </script>
@@ -73,6 +87,10 @@ export default {
 <style scoped>
 h2 {
   margin-bottom: 30px;
+}
+
+h2.filterHeading {
+  margin-top: 5px;
 }
 
 hr {
@@ -86,14 +104,26 @@ ul {
   margin-top: 0;
 }
 
+.inline {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-right: 5px;
+  justify-content: space-between;
+}
+
+.filter {
+  width: 300px;
+}
+
 .filterHeading {
   margin: 0;
+  margin-right: 25px;
 }
 
 .toolbar {
   display: flex;
   margin-bottom: 20px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .toolbar h2,
@@ -103,7 +133,7 @@ ul {
 }
 
 button#register {
-  margin-left: 12px;
+  margin-left: 50px;
   margin-right: 6px;
 }
 </style>
