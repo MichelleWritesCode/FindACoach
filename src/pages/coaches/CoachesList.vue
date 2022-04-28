@@ -1,19 +1,15 @@
 <template>
   <section class="container">
     <the-title>Coaches</the-title>
-    <base-card>
-      <section>
-        <section class="inline">
-          <h2 class="filterHeading">Filter coach</h2>
-          <input class="filter" type="text" v-model="filterCoach" />
-          <base-button id="register">
-            <template v-slot>
-              <router-link to="/register">register as a coach</router-link>
-            </template>
-          </base-button>
-        </section>
-      </section>
-    </base-card>
+    <section class="registration">
+      <base-button>
+        <template v-slot>
+          <router-link to="/register">register as a coach</router-link>
+        </template>
+      </base-button>
+    </section>
+
+    <filter-coach @change-filter="setFilters"></filter-coach>
 
     <base-card>
       <section>
@@ -45,16 +41,17 @@
 </template>
 
 <script>
-import BaseButton from '../../components/layout/BaseButton.vue';
-import BaseCard from '../../components/layout/BaseCard.vue';
+import BaseButton from '../../components/ui/BaseButton.vue';
+import BaseCard from '../../components/ui/BaseCard.vue';
 import TheTitle from '../../components/layout/TheTitle.vue';
-import CoachItem from '../../components/CoachItem.vue';
+import CoachItem from '../../components/coaches/CoachItem.vue';
+import FilterCoach from '../../components/coaches/FilterCoach.vue';
 
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
-  components: { BaseButton, BaseCard, TheTitle, CoachItem },
+  components: { BaseButton, BaseCard, TheTitle, CoachItem, FilterCoach },
   setup() {
     const store = useStore();
 
@@ -62,24 +59,48 @@ export default {
       return store.getters['allCoaches/hasCoaches'];
     });
 
-    const allCoaches = computed(() => {
-      return store.getters['allCoaches/coaches']; //allCoaches is the namespace of the module-coaches and coaches is the name of the getter (take a look a coaches-getters)
+    const activeFilters = ref({
+      frontend: true,
+      backend: true,
+      career: true,
+      graphics: true,
     });
 
-    let filterCoach = ref('');
+    function setFilters(updatedFilters) {
+      activeFilters.value = updatedFilters;
+      // console.log(activeFilters);
+      console.log(activeFilters);
+    }
 
+    //in onderstaande functie gaat iets mis...
     const filteredCoaches = computed(() => {
-      return allCoaches.value.filter((coach) => {
-        return (
-          coach.firstName
-            .toLowerCase()
-            .includes(filterCoach.value.toLowerCase()) ||
-          coach.lastName.toLowerCase().includes(filterCoach.value.toLowerCase())
-        );
+      const allCoaches = store.getters['allCoaches/coaches'];
+      return allCoaches.filter((coach) => {
+        if (activeFilters.value.frontend && coach.areas.includes('frontend')) {
+          console.log('frontend');
+          return true;
+        }
+        if (activeFilters.value.backend && coach.areas.includes('backend')) {
+          console.log('backend');
+          return true;
+        }
+        if (activeFilters.value.career && coach.areas.includes('career')) {
+          console.log('career');
+          return true;
+        }
+        if (activeFilters.value.graphics && coach.areas.includes('ux ui')) {
+          console.log('graphics');
+          return true;
+        }
+        return false;
       });
     });
 
-    return { allCoaches, hasCoaches, filterCoach, filteredCoaches };
+    return {
+      filteredCoaches,
+      hasCoaches,
+      setFilters,
+    };
   },
 };
 </script>
@@ -104,13 +125,6 @@ ul {
   margin-top: 0;
 }
 
-.inline {
-  display: flex;
-  flex-wrap: nowrap;
-  margin-right: 5px;
-  justify-content: space-between;
-}
-
 .filter {
   width: 300px;
 }
@@ -132,8 +146,9 @@ ul {
   flex-wrap: nowrap;
 }
 
-button#register {
-  margin-left: 50px;
-  margin-right: 6px;
+.registration {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 </style>
