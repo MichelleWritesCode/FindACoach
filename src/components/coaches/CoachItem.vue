@@ -31,8 +31,8 @@
 <script>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import BaseButtonOutline from './layout/BaseButtonOutline.vue';
-import BaseRibbon from './layout/BaseRibbon.vue';
+import BaseButtonOutline from '../ui/BaseButtonOutline.vue';
+import BaseRibbon from '../ui/BaseRibbon.vue';
 
 export default {
   components: { BaseButtonOutline, BaseRibbon },

@@ -31,10 +31,10 @@
 </template>
 
 <script>
-import BaseCard from '../../components/layout/BaseCard.vue';
-import BaseButton from '../../components/layout/BaseButton.vue';
+import BaseCard from '../../components/ui/BaseCard.vue';
+import BaseButton from '../../components/ui/BaseButton.vue';
 import TheTitle from '../../components/layout/TheTitle.vue';
-import BaseRibbon from '../../components/layout/BaseRibbon.vue';
+import BaseRibbon from '../../components/ui/BaseRibbon.vue';
 
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
