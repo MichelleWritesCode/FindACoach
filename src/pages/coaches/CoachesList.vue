@@ -149,6 +149,6 @@ ul {
 .registration {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin: 10px 0;
 }
 </style>
