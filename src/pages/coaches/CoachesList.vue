@@ -68,8 +68,6 @@ export default {
 
     function setFilters(updatedFilters) {
       activeFilters.value = updatedFilters;
-      // console.log(activeFilters);
-      console.log(activeFilters);
     }
 
     //in onderstaande functie gaat iets mis...
@@ -77,19 +75,15 @@ export default {
       const allCoaches = store.getters['allCoaches/coaches'];
       return allCoaches.filter((coach) => {
         if (activeFilters.value.frontend && coach.areas.includes('frontend')) {
-          console.log('frontend');
           return true;
         }
         if (activeFilters.value.backend && coach.areas.includes('backend')) {
-          console.log('backend');
           return true;
         }
         if (activeFilters.value.career && coach.areas.includes('career')) {
-          console.log('career');
           return true;
         }
         if (activeFilters.value.graphics && coach.areas.includes('ux ui')) {
-          console.log('graphics');
           return true;
         }
         return false;
