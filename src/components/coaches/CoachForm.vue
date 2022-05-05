@@ -95,9 +95,9 @@
         At least one expertise must be selected.
       </p>
     </div>
-    <p v-if="!form.formIsValid" class="errorMessage">
+    <!-- <p v-if="!form.formIsValid" class="errorMessage">
       Please fix the above errors and submit again.
-    </p>
+    </p> -->
     <base-button class="registerButton">register</base-button>
   </form>
 </template>
