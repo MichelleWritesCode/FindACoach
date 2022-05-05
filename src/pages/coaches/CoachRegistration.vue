@@ -13,14 +13,17 @@ import BaseCard from '../../components/ui/BaseCard.vue';
 import CoachForm from '../../components/coaches/CoachForm.vue';
 
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default {
   components: { BaseCard, CoachForm, TheTitle },
   setup() {
     const store = useStore();
+    const router = useRouter();
 
     function saveData(formData) {
-      store.dispatch('allCoaches/registerCoach', formData); //allCoaches = the namespace
+      store.dispatch('allCoaches/registerCoach', formData); //allCoaches = the namespace and dispatch = versturen naar de store
+      router.push('/coaches');
     }
 
     return { saveData };
