@@ -5,19 +5,43 @@
         <h2 class="filterHeading">Filter coach:</h2>
         <section class="checkboxes">
           <span class="filter-option">
-            <input type="checkbox" id="frontend" checked @change="setFilter" />
+            <input
+              class="checkboxColor"
+              type="checkbox"
+              id="frontend"
+              checked
+              @change="setFilter"
+            />
             <label for="frontend">frontend</label>
           </span>
           <span class="filter-option">
-            <input type="checkbox" id="backend" checked @change="setFilter" />
+            <input
+              class="checkboxColor"
+              type="checkbox"
+              id="backend"
+              checked
+              @change="setFilter"
+            />
             <label for="backend">backend</label>
           </span>
           <span class="filter-option">
-            <input type="checkbox" id="career" checked @change="setFilter" />
+            <input
+              class="checkboxColor"
+              type="checkbox"
+              id="career"
+              checked
+              @change="setFilter"
+            />
             <label for="career">career</label>
           </span>
           <span class="filter-option">
-            <input type="checkbox" id="graphics" checked @change="setFilter" />
+            <input
+              class="checkboxColor"
+              type="checkbox"
+              id="graphics"
+              checked
+              @change="setFilter"
+            />
             <label for="graphics">ux/ui</label>
           </span>
         </section>
@@ -61,6 +85,7 @@ label {
   font-size: 15px;
   margin-right: 15px;
   font-style: italic;
+  color: #219ebc;
 }
 
 .inline {
@@ -72,5 +97,8 @@ label {
 .checkboxes {
   margin-top: 14px;
   margin-left: 24px;
+}
+.checkboxColor {
+  accent-color: #176477;
 }
 </style>

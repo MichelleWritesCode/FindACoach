@@ -114,7 +114,7 @@ li {
 
 p.areas {
   margin: 6px 0 25px 0;
-  color: rgb(25, 32, 65);
+  color: #219ebc;
 }
 
 .hourlyRate {
