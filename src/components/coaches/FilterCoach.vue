@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 label {
-  font-size: 14px;
+  font-size: 15px;
   margin-right: 15px;
   font-style: italic;
 }
