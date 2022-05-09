@@ -36,7 +36,7 @@
 
 <script>
 import { ref } from 'vue';
-import BaseButton from '../components/ui/BaseButton.vue';
+import BaseButton from '../ui/BaseButton.vue';
 
 export default {
   components: { BaseButton },
@@ -81,8 +81,8 @@ export default {
       }
 
       const requestData = {
-        email: form.value.emailAddress,
-        message: form.value.message,
+        email: form.value.emailAddress.val,
+        message: form.value.message.val,
       };
 
       context.emit('save-request', requestData);
