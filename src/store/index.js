@@ -8,6 +8,17 @@ const store = createStore({
     allCoaches: coachesModule, //allCoaches is the namespace
     allRequests: requestsModule, //allRequests is the namespace
   },
+  state() {
+    //this is de rootState, because it is within the index.js instead of within the coaches-index.js or requests-index.js
+    return {
+      userId: 'c3', //this is the id of user Michelle
+    };
+  },
+  getters: {
+    userId(state) {
+      return state.userId;
+    },
+  },
 });
 
 export default store;
