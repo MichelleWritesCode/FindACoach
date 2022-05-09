@@ -10,7 +10,7 @@
 <script>
 import TheTitle from '../../components/layout/TheTitle.vue';
 import BaseCard from '../../components/ui/BaseCard.vue';
-import ContactForm from '../../components/ContactForm.vue';
+import ContactForm from '../../components/requests/ContactForm.vue';
 
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
