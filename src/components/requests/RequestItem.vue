@@ -36,7 +36,7 @@ a {
 }
 
 a:hover {
-  border-bottom: rgb(25, 32, 65) solid 3px;
+  border-bottom: rgb(25, 32, 65) solid 1px;
 }
 
 .message {

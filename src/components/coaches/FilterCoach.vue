@@ -81,6 +81,24 @@ export default {
 </script>
 
 <style scoped>
+@media only screen and (max-width: 450px) {
+  .checkboxes {
+    max-width: 200px;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .checkboxes {
+    max-width: 280px;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .checkboxes {
+    max-width: 500px;
+  }
+}
+
 label {
   font-size: 15px;
   margin-right: 15px;

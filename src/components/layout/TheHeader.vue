@@ -21,19 +21,10 @@ a:hover {
 }
 
 header {
-  display: flex;
-  flex-wrap: nowrap;
-  text-align: right;
-  justify-content: space-between;
-  padding: 10px 60px;
-  padding-left: 200px;
   background-color: rgb(25, 32, 65);
 }
 
 header .menuItem {
-  display: inline;
-  justify-content: center;
-  margin: 10px;
   padding: 5px 15px;
   vertical-align: middle;
   color: white;
@@ -44,7 +35,65 @@ header .menuItem {
   letter-spacing: 1px;
 }
 
-nav {
-  margin-top: 20px;
+@media only screen and (max-width: 498px) {
+  header,
+  nav,
+  header .menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  header .menuItem {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 10px 10px;
+  }
+}
+
+@media only screen and (min-width: 498px) {
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    height: 120px;
+    justify-content: center;
+    padding: 0 100px;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  header .menuItem {
+    justify-content: center;
+    margin: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  header {
+    display: flex;
+    height: 85px;
+    flex-wrap: nowrap;
+    text-align: right;
+    justify-content: space-between;
+    padding: 10px 60px;
+    padding-left: 100px;
+  }
+
+  header .menuItem {
+    display: inline;
+    justify-content: center;
+    margin: 10px;
+  }
+
+  nav {
+    margin-top: 20px;
+  }
 }
 </style>

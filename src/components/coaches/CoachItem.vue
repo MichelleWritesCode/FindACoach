@@ -1,28 +1,22 @@
 <template>
-  <section class="inline">
+  <section class="inline hr">
     <li>
       <h3>{{ fullName }}</h3>
       <p class="areas">{{ areaStyling(coachAreas) }}</p>
-      <base-ribbon>
-        <p class="hourlyRate">$ {{ coachHourlyRate }},- / hour</p>
-      </base-ribbon>
+      <base-ribbon>€ {{ coachHourlyRate }},- / hour</base-ribbon>
     </li>
     <div class="actions">
-      <ul>
-        <base-button-outline>
-          <li>
-            <router-link :to="coachDetailsLink" class="link"
-              >view details</router-link
-            >
-          </li>
-        </base-button-outline>
-        <base-button-outline>
-          <li>
-            <router-link :to="coachContactLink" class="link"
-              >contact coach</router-link
-            >
-          </li>
-        </base-button-outline>
+      <ul class="inline-actions">
+        <li class="button">
+          <base-button-outline :linkToPage="coachDetailsLink">
+            view details
+          </base-button-outline>
+        </li>
+        <li class="button">
+          <base-button-outline :linkToPage="coachContactLink">
+            contact coach
+          </base-button-outline>
+        </li>
       </ul>
     </div>
   </section>
@@ -88,12 +82,48 @@ export default {
 </script>
 
 <style scoped>
+@media only screen and (max-width: 498px) {
+  button {
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 498px) {
+  .inline-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 200px;
+    margin-right: 5px;
+  }
+
+  button {
+    width: 120px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  div.actions {
+    margin-top: 50px;
+  }
+  .inline-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    max-width: 400px;
+    margin-right: 5px;
+  }
+}
+
 .inline {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  border-bottom: 1px solid rgb(25, 32, 65, 0.1);
   margin-right: 5px;
+}
+
+.hr {
+  border-bottom: 1px solid rgb(25, 32, 65, 0.1);
 }
 
 ul {
@@ -117,18 +147,8 @@ p.areas {
   color: #219ebc;
 }
 
-.hourlyRate {
-  color: rgb(25, 32, 65, 0.75);
-  font-weight: 600;
-  font-size: 14px;
-}
-
-p.hourlyRate {
-  margin: 0;
-}
-
-div.actions {
-  margin-top: 50px;
+.button {
+  margin-left: 15px;
 }
 
 a {
