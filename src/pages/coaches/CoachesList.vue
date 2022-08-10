@@ -1,8 +1,15 @@
 <template>
+  <base-dialog
+    :showDialog="!!error"
+    title="An error has occurred!"
+    @close="closeDialog"
+  >
+    <p>{{ error }}</p>
+  </base-dialog>
   <section class="container">
-    <the-title>Coaches</the-title>
+    <the-title></the-title>
     <section class="registration">
-      <base-button>
+      <base-button v-if="!isCoach">
         <template v-slot>
           <router-link to="/register">register as a coach</router-link>
         </template>
@@ -15,7 +22,12 @@
       <section>
         <section class="toolbar">
           <section class="controle">
-            <base-button><template v-slot>refresh list</template></base-button>
+            <base-button @click="loadCoachList">
+              <font-awesome-icon
+                class="icon"
+                icon="fa-solid fa-rotate"
+              />refresh list
+            </base-button>
           </section>
         </section>
         <hr />
@@ -33,7 +45,7 @@
             >
             </coach-item>
           </ul>
-          <h3 v-else>No coaches found</h3>
+          <h3 v-else>No coaches are found</h3>
         </section>
       </section>
     </base-card>
@@ -43,6 +55,7 @@
 <script>
 import BaseButton from '../../components/ui/BaseButton.vue';
 import BaseCard from '../../components/ui/BaseCard.vue';
+import BaseDialog from '../../components/ui/BaseDialog.vue';
 import TheTitle from '../../components/layout/TheTitle.vue';
 import CoachItem from '../../components/coaches/CoachItem.vue';
 import FilterCoach from '../../components/coaches/FilterCoach.vue';
@@ -51,12 +64,40 @@ import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
-  components: { BaseButton, BaseCard, TheTitle, CoachItem, FilterCoach },
+  components: {
+    BaseButton,
+    BaseCard,
+    BaseDialog,
+    TheTitle,
+    CoachItem,
+    FilterCoach,
+  },
   setup() {
     const store = useStore();
 
+    const error = ref(null);
+
+    async function loadCoachList() {
+      try {
+        await store.dispatch('allCoaches/loadCoaches');
+      } catch (catchedError) {
+        console.log('error');
+        error.value = catchedError.message || 'Something went wrong';
+      }
+    }
+
+    function closeDialog() {
+      error.value = null;
+    }
+
+    loadCoachList();
+
     const hasCoaches = computed(() => {
       return store.getters['allCoaches/hasCoaches'];
+    });
+
+    const isCoach = computed(() => {
+      return store.getters['allCoaches/isCoach'];
     });
 
     const activeFilters = ref({
@@ -70,7 +111,6 @@ export default {
       activeFilters.value = updatedFilters;
     }
 
-    //in onderstaande functie gaat iets mis...
     const filteredCoaches = computed(() => {
       const allCoaches = store.getters['allCoaches/coaches'];
       return allCoaches.filter((coach) => {
@@ -91,8 +131,12 @@ export default {
     });
 
     return {
+      closeDialog,
+      error,
       filteredCoaches,
       hasCoaches,
+      isCoach,
+      loadCoachList,
       setFilters,
     };
   },
@@ -121,6 +165,15 @@ ul {
 
 .filter {
   width: 300px;
+}
+
+.icon {
+  padding-right: 10px;
+}
+
+.icon-spinner {
+  color: #219ebc;
+  margin-left: 20px;
 }
 
 .filterHeading {
