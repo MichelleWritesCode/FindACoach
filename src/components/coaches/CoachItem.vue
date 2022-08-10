@@ -86,6 +86,10 @@ export default {
   button {
     width: 80px;
   }
+
+  .inline-actions {
+    margin-top: 55px;
+  }
 }
 
 @media only screen and (min-width: 498px) {
@@ -95,6 +99,7 @@ export default {
     justify-content: flex-end;
     max-width: 200px;
     margin-right: 5px;
+    margin-top: 60px;
   }
 
   button {
@@ -104,7 +109,7 @@ export default {
 
 @media only screen and (min-width: 768px) {
   div.actions {
-    margin-top: 50px;
+    margin-top: 55px;
   }
   .inline-actions {
     display: flex;
@@ -128,7 +133,6 @@ export default {
 
 ul {
   text-align: right;
-  margin-top: 60px;
   padding-left: 10px;
 }
 
@@ -149,6 +153,7 @@ p.areas {
 
 .button {
   margin-left: 15px;
+  margin-top: 0px;
 }
 
 a {
