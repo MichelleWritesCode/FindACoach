@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from 'vue-router'; // use {} because these dependencies are from 'outside' (extern)
+import { createWebHistory, createRouter } from 'vue-router';
 
 import CoachesList from './pages/coaches/CoachesList.vue';
 import CoachDetails from './pages/coaches/CoachDetails.vue';

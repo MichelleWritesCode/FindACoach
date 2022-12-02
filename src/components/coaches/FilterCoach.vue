@@ -65,7 +65,7 @@ export default {
     };
 
     function setFilter(event) {
-      const inputId = event.target.id; //is the id of the input in the template, such as 'frontend', 'backend', etc.
+      const inputId = event.target.id;
       const isActive = event.target.checked;
       const updatedFilters = {
         ...filters,

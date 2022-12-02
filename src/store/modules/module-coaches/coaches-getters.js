@@ -1,6 +1,6 @@
 export default {
   coaches(state) {
-    return state.coaches; //use 'coaches', because in the coaches-index you will find in the 'state' an array named 'coaches'
+    return state.coaches;
   },
   isCoach(_, getters, _2, rootGetters) {
     const coaches = getters.coaches;

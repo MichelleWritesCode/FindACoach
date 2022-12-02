@@ -1,50 +1,33 @@
 <template>
   <form @submit.prevent="submitForm">
+    <p v-if="!formIsValid" class="errorMessage">
+      Please fix the error(s) below and submit again.
+    </p>
     <div class="form-control" :class="{ invalid: !form.firstName.isValid }">
       <label>Firstname</label>
-      <input
-        type="text"
-        id="firstname"
-        v-model.trim="form.firstName.val"
-        @blur="clearValidity('firstName')"
-      />
+      <input type="text" id="firstname" v-model.trim="form.firstName.val" @blur="clearValidity('firstName')" />
       <p class="errorMessage" v-if="!form.firstName.isValid">
         Firstname must not be empty.
       </p>
     </div>
     <div class="form-control" :class="{ invalid: !form.lastName.isValid }">
       <label>Lastname</label>
-      <input
-        type="text"
-        id="lastname"
-        v-model.trim="form.lastName.val"
-        @blur="clearValidity('lastName')"
-      />
+      <input type="text" id="lastname" v-model.trim="form.lastName.val" @blur="clearValidity('lastName')" />
       <p class="errorMessage" v-if="!form.lastName.isValid">
         Lastname must not be empty.
       </p>
     </div>
     <div class="form-control" :class="{ invalid: !form.description.isValid }">
       <label>Description</label>
-      <textarea
-        type="text"
-        id="description"
-        rows="5"
-        v-model.trim="form.description.val"
-        @blur="clearValidity('description')"
-      />
+      <textarea type="text" id="description" rows="5" v-model.trim="form.description.val"
+        @blur="clearValidity('description')" />
       <p class="errorMessage" v-if="!form.description.isValid">
         The description must not be empty.
       </p>
     </div>
     <div class="form-control" :class="{ invalid: !form.rate.isValid }">
       <label>Hourly rate</label>
-      <input
-        type="number"
-        id="rate"
-        v-model.number="form.rate.val"
-        @blur="clearValidity('rate')"
-      />
+      <input type="number" id="rate" v-model.number="form.rate.val" @blur="clearValidity('rate')" />
       <p class="errorMessage" v-if="!form.rate.isValid">
         Rate must be greater than 0.
       </p>
@@ -52,52 +35,25 @@
     <div class="form-control" :class="{ invalid: !form.areas.isValid }">
       <h4>Areas of expertise</h4>
       <div>
-        <input
-          type="checkbox"
-          id="frontend"
-          value="frontend"
-          v-model="form.areas.val"
-          @blur="clearValidity('areas')"
-        />
+        <input type="checkbox" id="frontend" value="frontend" v-model="form.areas.val" @blur="clearValidity('areas')" />
         <label for="frontend">frontend development</label>
       </div>
       <div>
-        <input
-          type="checkbox"
-          id="backend"
-          value="backend"
-          v-model="form.areas.val"
-          @blur="clearValidity('areas')"
-        />
+        <input type="checkbox" id="backend" value="backend" v-model="form.areas.val" @blur="clearValidity('areas')" />
         <label for="backend">backend development</label>
       </div>
       <div>
-        <input
-          type="checkbox"
-          id="career"
-          value="career"
-          v-model="form.areas.val"
-          @blur="clearValidity('areas')"
-        />
+        <input type="checkbox" id="career" value="career" v-model="form.areas.val" @blur="clearValidity('areas')" />
         <label for="career">career advisory</label>
       </div>
       <div>
-        <input
-          type="checkbox"
-          id="graphics"
-          value="ux ui"
-          v-model="form.areas.val"
-          @blur="clearValidity('areas')"
-        />
+        <input type="checkbox" id="graphics" value="ux ui" v-model="form.areas.val" @blur="clearValidity('areas')" />
         <label for="graphics">ux/ui design</label>
       </div>
       <p class="errorMessage" v-if="!form.areas.isValid">
         At least one expertise must be selected.
       </p>
     </div>
-    <!-- <p v-if="!form.formIsValid" class="errorMessage">
-      Please fix the above errors and submit again.
-    </p> -->
     <base-button class="registerButton">register</base-button>
   </form>
 </template>
@@ -111,6 +67,7 @@ export default {
   components: { BaseButton },
   emit: ['save-data'],
   setup(props, context) {
+    const formIsValid = ref(true);
     const form = ref({
       firstName: {
         val: '',
@@ -131,45 +88,62 @@ export default {
       areas: {
         val: [],
         isValid: true,
-      },
-      formIsValid: true,
+      }
     });
 
-    function validateForm() {
-      form.value.formIsValid = true;
-
-      if (form.value.firstName.val === '') {
-        form.value.firstName.isValid = false;
-        form.value.formIsValid = false;
-      }
-      if (form.value.lastName.val === '') {
-        form.value.lastName.isValid = false;
-        form.value.formIsValid = false;
-      }
-      if (form.value.description.val === '') {
-        form.value.description.isValid = false;
-        form.value.formIsValid = false;
-      }
-      if (!form.value.rate.val || form.value.rate.val < 0) {
-        form.value.rate.isValid = false;
-        form.value.formIsValid = false;
-      }
-      if (form.value.areas.val.length === 0) {
-        form.value.areas.isValid = false;
-        form.value.formIsValid = false;
-      }
+    function validateTotalForm() {
+      const notValid = Object.values(form.value).some(
+        (value) => !value.isValid
+      );
+      return notValid ? (formIsValid.value = false) : (formIsValid.value = true);
     }
 
-    function clearValidity(input) {
-      form.value[input].isValid = true;
+    function validateForm() {
+      const keysArray = Object.keys(form.value);
+      keysArray.forEach((key) =>
+        !form.value[key].val || form.value[key].val.length === 0
+          ? (form.value[key].isValid = false)
+          : (form.value[key].isValid = true)
+      );
+
+      validateTotalForm();
+    }
+
+    // function validateForm() {
+    //   form.value.formIsValid = true;
+
+    //   if (form.value.firstName.val === '') {
+    //     form.value.firstName.isValid = false;
+    //     form.value.formIsValid = false;
+    //   }
+    //   if (form.value.lastName.val === '') {
+    //     form.value.lastName.isValid = false;
+    //     form.value.formIsValid = false;
+    //   }
+    //   if (form.value.description.val === '') {
+    //     form.value.description.isValid = false;
+    //     form.value.formIsValid = false;
+    //   }
+    //   if (!form.value.rate.val || form.value.rate.val < 0) {
+    //     form.value.rate.isValid = false;
+    //     form.value.formIsValid = false;
+    //   }
+    //   if (form.value.areas.val.length === 0) {
+    //     form.value.areas.isValid = false;
+    //     form.value.formIsValid = false;
+    //   }
+    // }
+
+    function clearValidity(key) {
+      form.value[key].isValid = true;
     }
 
     function submitForm() {
       validateForm();
 
-      if (!form.value.formIsValid) {
+      if (!formIsValid.value) {
         console.log('form is not valid');
-        return; //if the form is not valid, you don't want to execute the code below
+        return;
       }
 
       const formData = {
@@ -186,7 +160,9 @@ export default {
     return {
       clearValidity,
       form,
+      formIsValid,
       submitForm,
+      validateTotalForm
     };
   },
 };
@@ -205,7 +181,7 @@ label {
   color: rgb(25, 32, 65, 0.6);
 }
 
-input[type='checkbox'] + label {
+input[type='checkbox']+label {
   font-weight: normal;
   display: inline;
   margin: 0 0 0 0.5rem;

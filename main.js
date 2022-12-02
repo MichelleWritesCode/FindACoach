@@ -1,4 +1,4 @@
-import { createApp } from 'vue'; // use {} because 'createApp' is from 'outside'
+import { createApp } from 'vue';
 import App from './App.vue';
 
 const app = createApp(App);

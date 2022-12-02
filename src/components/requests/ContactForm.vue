@@ -1,5 +1,8 @@
 <template>
   <form @submit.prevent="sendMessage">
+      <p v-if="!formIsValid" class="errorMessage" >
+        Please fix the error(s) below and submit again.
+      </p>
     <div class="form-controle" :class="{ invalid: !form.emailAddress.isValid }">
       <label for="email">Please enter your email here</label>
       <input
@@ -20,13 +23,10 @@
         v-model.trim="form.message.val"
         @blur="clearValidity('message')"
       />
-      <!-- the value of 'for' should be the same as the id of the input or textarea (it refers to eachother) -->
       <p class="errorMessage" v-if="!form.message.isValid">
         Please enter a message for the coach.
       </p>
-      <!-- <p class="errorMessage" v-if="!form.formIsValid">
-        Please fix the above errors and submit again.
-      </p> -->
+      
     </div>
     <div>
       <base-button class="contactButton">Send message</base-button>
@@ -42,6 +42,7 @@ export default {
   components: { BaseButton },
   emit: ['save-request'],
   setup(props, context) {
+    const formIsValid = ref(true);
     const form = ref({
       emailAddress: {
         val: '',
@@ -51,21 +52,24 @@ export default {
         val: '',
         isValid: true,
       },
-      formIsValid: true,
     });
 
-    function validateForm() {
-      form.value.formIsValid = true;
+    function validateTotalForm() {
+      const notValid = Object.values(form.value).some(
+        (value) => !value.isValid
+      );
+      return notValid ? (formIsValid.value = false) : (formIsValid.value = true);
+    }
 
-      if (form.value.emailAddress.val === '') {
-        form.value.emailAddress.isValid = false;
-        form.value.formIsValid = false;
-      }
-      if (form.value.message.val === '') {
-        form.value.message.isValid = false;
-        console.log('test');
-        form.value.formIsValid = false;
-      }
+    function validateForm() {
+      const keysArray = Object.keys(form.value);
+      keysArray.forEach((key) =>
+        !form.value[key].val || form.value[key].val.length === 0
+          ? (form.value[key].isValid = false)
+          : (form.value[key].isValid = true)
+      );
+
+      validateTotalForm();
     }
 
     function clearValidity(input) {
@@ -75,9 +79,9 @@ export default {
     function sendMessage() {
       validateForm();
 
-      if (!form.value.formIsValid) {
+      if (!formIsValid.value) {
         console.log('form is not valid');
-        return; //if the form is not valid, you don't want to execute the code below
+        return; 
       }
 
       const requestData = {
@@ -88,7 +92,7 @@ export default {
       context.emit('save-request', requestData);
     }
 
-    return { clearValidity, form, sendMessage };
+    return { clearValidity, form, formIsValid, sendMessage, validateTotalForm };
   },
 };
 </script>

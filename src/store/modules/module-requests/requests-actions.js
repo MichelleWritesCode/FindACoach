@@ -6,7 +6,7 @@ export default {
     };
 
     const response = await fetch(
-      `https://findcoachdb-16a21-default-rtdb.europe-west1.firebasedatabase.app/requests/${payload.coachId}.json`,
+      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/requests/${payload.coachId}.json`,
       {
         method: 'POST',
         body: JSON.stringify(newRequest),
@@ -20,7 +20,7 @@ export default {
       throw error;
     }
 
-    newRequest.id = responseData.name; //the name field is created by Firebase
+    newRequest.id = responseData.name;
     newRequest.coachId = payload.coachId;
 
     context.commit('contactCoach', newRequest);
@@ -29,7 +29,7 @@ export default {
   async loadRequests(context) {
     const coachId = context.rootGetters.userId;
     const response = await fetch(
-      `https://findcoachdb-16a21-default-rtdb.europe-west1.firebasedatabase.app/requests/${coachId}.json`
+      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/requests/${coachId}.json`
     );
 
     const responseData = await response.json();

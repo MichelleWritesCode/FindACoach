@@ -27,7 +27,7 @@ export default {
         email: requestData.email,
         message: requestData.message,
         coachId: route.params.id,
-      }); //dispatch refers to actions --> contactCoach is the name of the function within the actions file that should be dispatched
+      });
       router.replace('/coaches');
     }
 

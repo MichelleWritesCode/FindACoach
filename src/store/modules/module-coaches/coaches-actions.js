@@ -1,9 +1,7 @@
 export default {
   async registerCoach(context, payload) {
-    //payload is the formData which comes from CoachForm.vue via CoachRegistration.vue
     const userId = context.rootGetters.userId;
     const coachData = {
-      //in CoachForm.vue the data names are first, last, desc, etc., but needs to be converted to the names in coaches-index.js which are firstName, lastName, description, etc.; that's what happened below
       firstName: payload.first,
       lastName: payload.last,
       description: payload.desc,
@@ -12,9 +10,9 @@ export default {
     };
 
     const response = await fetch(
-      `https://findcoachdb-16a21-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json`,
+      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json`,
       {
-        method: 'PUT', //PUT = overwrite data when it already exist or add/create if it doesn't exist, with POST you always add/create a new entry - in this case - a coach
+        method: 'PUT',
         body: JSON.stringify(coachData),
       }
     );
@@ -25,13 +23,13 @@ export default {
 
     context.commit('registerCoach', {
       ...coachData,
-      id: userId, //naast het versturen van de coachData, stuur je ook een userId mee
-    }); //commit = vastleggen vd data
+      id: userId,
+    });
   },
 
   async loadCoaches(context) {
     const response = await fetch(
-      `https://findcoachdb-16a21-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`
+      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`
     );
 
     const responseData = await response.json();
@@ -53,7 +51,9 @@ export default {
       };
       coaches.push(coach);
 
-      context.commit('setCoaches', coaches); //setCoaches comes from the mutations file
+      
     }
+    console.log('test');
+    context.commit('setCoaches', coaches);
   },
 };

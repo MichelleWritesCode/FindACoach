@@ -22,7 +22,7 @@ export default {
     const router = useRouter();
 
     function saveData(formData) {
-      store.dispatch('allCoaches/registerCoach', formData); //allCoaches = the namespace and dispatch = versturen naar de store
+      store.dispatch('allCoaches/registerCoach', formData);
       router.push('/coaches');
     }
 
