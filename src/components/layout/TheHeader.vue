@@ -3,10 +3,41 @@
     <h1><router-link to="/">Find a coach</router-link></h1>
     <nav>
       <router-link class="menuItem" to="/coaches">all coaches</router-link>
-      <router-link class="menuItem" to="/requests">requests</router-link>
+      <router-link v-if="isLoggedIn" class="menuItem" to="/requests">requests</router-link>
+      <router-link v-else class="menuItem" to="/auth">login</router-link>
+      <base-button v-if="isLoggedIn" @click="logout" class="menuItem outline">Logout</base-button>
     </nav>
   </header>
 </template>
+
+<script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import BaseButton from '../ui/BaseButton.vue';
+
+export default {
+  components: { BaseButton },
+  setup() { 
+    const store = useStore();
+    const router = useRouter();
+
+    const isLoggedIn = computed(() => {
+      return store.getters.isAuthenticated;
+    })
+
+    function logout() {
+      store.dispatch('logout');
+      router.push('/coaches');
+    }
+
+    return {
+      isLoggedIn,
+      logout
+    }
+  }
+}
+</script>
 
 <style scoped>
 a {
@@ -35,6 +66,13 @@ header .menuItem {
   letter-spacing: 1px;
 }
 
+header .outline {
+  background-color: rgb(25, 32, 65);
+  color: goldenrod;
+  border: 1px solid goldenrod;
+  margin-left: 15px;
+}
+
 @media only screen and (max-width: 498px) {
   header,
   nav,
@@ -53,6 +91,13 @@ header .menuItem {
     display: flex;
     flex-wrap: wrap;
     margin: 0 10px 10px;
+  }
+
+  header .outline {
+    background-color: rgb(25, 32, 65);
+    color: goldenrod;
+    border: 1px solid goldenrod;
+    margin-left: 15px;
   }
 }
 
@@ -73,6 +118,13 @@ header .menuItem {
     justify-content: center;
     margin: 10px;
   }
+
+  header .outline {
+    background-color: rgb(25, 32, 65);
+    color: goldenrod;
+    border: 1px solid goldenrod;
+    margin-left: 15px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -90,6 +142,13 @@ header .menuItem {
     display: inline;
     justify-content: center;
     margin: 10px;
+  }
+
+  header .outline {
+    background-color: rgb(25, 32, 65);
+    color: goldenrod;
+    border: 1px solid goldenrod;
+    margin-left: 15px;
   }
 
   nav {

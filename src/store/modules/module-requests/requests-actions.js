@@ -6,7 +6,7 @@ export default {
     };
 
     const response = await fetch(
-      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/requests/${payload.coachId}.json`,
+      `https://findcoach-56ef5-default-rtdb.europe-west1.firebasedatabase.app/requests/${payload.coachId}.json`,
       {
         method: 'POST',
         body: JSON.stringify(newRequest),
@@ -28,8 +28,9 @@ export default {
 
   async loadRequests(context) {
     const coachId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/requests/${coachId}.json`
+      `https://findcoach-56ef5-default-rtdb.europe-west1.firebasedatabase.app/requests/${coachId}.json?auth=${token}`
     );
 
     const responseData = await response.json();

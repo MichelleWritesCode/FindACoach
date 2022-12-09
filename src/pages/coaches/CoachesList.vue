@@ -9,7 +9,8 @@
   <section class="container">
     <the-title></the-title>
     <section class="registration">
-      <base-button v-if="!isCoach">
+      <base-button v-if="!isLoggedIn"><router-link to="/auth?redirect=register">login to register as coach</router-link></base-button>
+      <base-button v-if="isLoggedIn && !isCoach">
         <template v-slot>
           <router-link to="/register">register as a coach</router-link>
         </template>
@@ -74,8 +75,11 @@ export default {
   },
   setup() {
     const store = useStore();
-
     const error = ref(null);
+
+    const isLoggedIn = computed(() => {
+      return store.getters.isAuthenticated;
+    })
 
     async function loadCoachList() {
       try {
@@ -136,6 +140,7 @@ export default {
       filteredCoaches,
       hasCoaches,
       isCoach,
+      isLoggedIn,
       loadCoachList,
       setFilters,
     };

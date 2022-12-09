@@ -9,8 +9,10 @@ export default {
       areas: payload.areas,
     };
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json`,
+      `https://findcoach-56ef5-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json?auth=${token}`,
       {
         method: 'PUT',
         body: JSON.stringify(coachData),
@@ -29,7 +31,7 @@ export default {
 
   async loadCoaches(context) {
     const response = await fetch(
-      `https://findacoach-e1005-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`
+      `https://findcoach-56ef5-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`
     );
 
     const responseData = await response.json();
@@ -53,7 +55,6 @@ export default {
 
       
     }
-    console.log('test');
     context.commit('setCoaches', coaches);
   },
 };
