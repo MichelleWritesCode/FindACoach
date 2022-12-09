@@ -1,13 +1,15 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
-import CoachesList from './pages/coaches/CoachesList.vue';
-import CoachDetails from './pages/coaches/CoachDetails.vue';
-import CoachRegistration from './pages/coaches/CoachRegistration.vue';
-import ContactCoach from './pages/requests/ContactCoach.vue';
-import RequestsList from './pages/requests/RequestsList.vue';
-import NotFound from './pages/NotFound.vue';
-import UserAuth  from './pages/auth/UserAuth.vue';
 import store from './store/index.js';
+
+//you can import components like you see below; this will render components only when you need them (won't render all the components all the time)
+const CoachDetails = () => import('./pages/coaches/CoachDetails.vue');
+const CoachesList = () => import('./pages/coaches/CoachesList.vue');
+const CoachRegistration = () => import('./pages/coaches/CoachRegistration.vue');
+const ContactCoach = () => import('./pages/requests/ContactCoach.vue');
+const RequestsList = () => import('./pages/requests/RequestsList.vue');
+const NotFound = () => import('./pages/NotFound.vue');
+const UserAuth = () => import ('./pages/auth/UserAuth.vue');
 
 const router = createRouter({
   history: createWebHistory(),
